@@ -1,0 +1,67 @@
+#!/usr/bin/perl
+# postinst script for cclite
+#
+
+# copies the hosts file and then attempts to write an entry
+# for 127.0.0.1 cclite.private.serve
+#      127.0.0.1 <short_name> cclite.private.server
+
+sub write_server_entry {
+
+    `cp /etc/hosts  /etc/hosts.saved`;    # copy hosts file
+    open( HOSTS, "+</etc/hosts" );
+    my $short_name;
+
+    while (<HOSTS>) {
+     s/^(127\.0\.1\.1.*)$/$1 cclite.private.server/;      
+    }
+
+}
+
+use strict ;
+# see: dh_installdeb(1)
+# unbuffer output as policy manual
+my $operation = $ARGV[0] ;
+$| = 1;
+my $web_root =  '/var/www' ;
+my $cclite_root = "$web_root/cclite" ;
+
+
+if ($operation =~    /configure/) {
+
+ # copy current hosts file and
+ # write cclite.private.server into the hosts file...
+  `cp /etc/hosts /etc/hosts.saved-by-cclite` ;
+   write_server_entry();
+ # make configuration file writable by apache
+  `chown www-data /usr/share/cclite/config/cclite.cf` ;
+ # make var/cclite owned by apache, gammu must be in this group therefore
+  `chown -R www-data /var/cclite/` ;
+ # make the output web root directory writable by apache + group
+  `chown -R www-data /var/www/cclite/public_html/html` ;
+  `chmod -R g+w /var/www/cclite/public_html/html` ;
+ # create a directory for charts are writable by apache + group
+ `mkdir /var/www/cclite/public_html/images/charts` ;
+ `chown -R www-data /var/www/cclite/public_html/images/charts` ;
+ `chmod -R g+w /var/www/cclite/public_html/images/charts` ;
+
+ #FIXME: cclite added as a user in www-data for batch jobs...
+ # `adduser --system --ingroup www-data --disabled-password cclite` ; 
+
+ # enable mod_rewrite and cclite server the apache2 way...then
+ # bounce apache to pick up 000-default config file
+  `a2enmod rewrite` ;
+  `a2ensite cclite.private.server` ;
+ # `/etc/init.d/apache2 reload` ;
+  `/etc/init.d/apache2 restart` ;
+
+ #FIXME: Doesn't deal with upgrades and reconfigs at present
+} else {
+        print "postinst called with unknown argument \`$operation\'" ;
+        exit 1 ;
+}
+
+exit 0 ;
+
+
+

@@ -1,0 +1,7 @@
+# extra configuration for readsms_from_gammu
+# sleep for 2 minutes between passes
+smssleep=120
+# use local interface, don't use soap
+smslocal=1
+
+

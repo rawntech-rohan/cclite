@@ -1,0 +1,8 @@
+cclite for Debian
+-----------------
+
+This is the debian package corresponding to version 0.5.0 of cclite.
+It has been reskinned and various minor bugs removed, so it's now
+at version 0.5.1
+
+ -- Hugh Barnard <hugh.barnard@gmail.com>  Fri, 31 Oct 2008 14:50:36 +0000

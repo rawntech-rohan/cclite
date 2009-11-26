@@ -1,0 +1,7 @@
+136:	final indentation level: 1
+
+Final nesting depth of '{'s is 1
+The most recent un-matched '{' is on line 90
+90: if ( $pop->login( $username, $password ) > 0 ) {
+                                                   ^
+136:	To save a full .LOG file rerun with -g

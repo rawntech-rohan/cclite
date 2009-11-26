@@ -1,0 +1,242 @@
+=head1 NAME
+
+Ccmailgateway.pm
+
+=head1 SYNOPSIS
+
+Transaction conversion interfaces inwards for mail etc.
+
+=head1 DESCRIPTION
+
+This is the second generation mail transaction logic:
+
+- better checking
+- provides some feedback
+- remote mailboxes rather than local read of mail file
+- in separate module to prepare for gpg etc. etc.
+
+
+
+Mail Transactions
+-> Confirm pin         p123456 confirm (to be done)
+-> Change pin          p123456 change p345678 (to be done)
+-> Pay                 send 5 <currencyname> to <username> at <registry_name> for stuff
+-> Query Balance       balance (to be done, like sms mailed balance transaction)
+
+
+=head1 AUTHOR
+
+Hugh Barnard
+
+
+
+=head1 SEE ALSO
+
+Cchooks.pm
+
+=head1 COPYRIGHT
+
+(c) Hugh Barnard 2005 - 2008 GPL Licenced
+ 
+=cut
+
+package Ccmailgateway;
+use strict;
+use vars qw(@ISA @EXPORT);
+use Exporter;
+my $VERSION = 1.00;
+@ISA = qw(Exporter);
+use Cclite;
+use Cclitedb;
+use Ccu;
+use Ccsecure;
+use Ccconfiguration;    # new style configuration method
+use Net::POP3;
+###use Net::SMTP;
+
+@EXPORT = qw(
+  mail_message_parse
+);
+
+=head3 messagehash
+
+this is the provisional solution to the multilingual message fragments
+later, it will go somewhere neater
+to change these, just substitute a translated hash
+ 
+=cut
+
+# application specific globals
+our %messages = readmessages("en");
+
+
+
+
+=item use in 0.7.1
+
+sub notify_by_mail {
+
+
+my $host = '10.0.0.10' ;
+my $to = "cclite.dalston\@cclite.cclite.k-hosting.co.uk" ;
+
+###my $host = 'cclite.cclite.k-hosting.co.uk' ;
+###my $user = 'cclite.dalston@cclite.cclite.k-hosting.co.uk' ;
+
+
+my $smtp = Net::SMTP->new($host,
+##                           Hello => '10.0.0.10',
+                           Timeout => 30,
+                           Debug   => 1,
+                          );
+
+    $smtp->auth($user,$password);
+
+ 
+
+
+    $smtp->mail('hbarnard\@3wave.co.uk');
+    $smtp->to($to);
+    $smtp->data();
+    $smtp->datasend("To: $to\n");
+    $smtp->datasend("Subject: Payment message\n");
+    $smtp->datasend("\n");
+    $smtp->datasend("send 42 hacks to test2 at dalston for dillying\n");
+    $smtp->datasend("\.\n");
+    $smtp->dataend();
+    $smtp->quit;
+    
+    return ;
+    
+}
+
+=cut
+
+
+sub _check_to_and_from {
+    
+    my ($transaction_description_ref) = @_ ;
+    
+    my $message ;
+    
+        my ( $error, $fromuserref ) =
+          get_where( $class, $fromregistry, 'om_users', 'userEmail',
+            $transaction_description_ref->{'from'}, $token, '', '' );
+        my ( $error, $touserref ) =
+          get_where( $class, $transaction_description_ref->{'registry'}, 'om_users', 'userLogin', $transaction_description_ref->{'destination'},
+            $token, $offset, $limit );
+        my ( $error, $currencyref ) =
+          get_where( $class, $transaction_description_ref->{'registry'}, 'om_currencies', 'name', $transaction_description_ref->{'currency'},
+            $token, $offset, $limit );
+
+        # one of the above lookups fails, reject the whole transaction
+        if (   ( !length($fromuserref) )
+            || ( !length($touserref) )
+            || ( !length($currencyref) ) )
+        {
+            $message = "$from{$key},"transaction invalid: $input" ;
+        }
+    return ($fromuserref{userLogin}, $message) ;
+}
+
+
+sub mail_message_parse {
+
+    my ($class, $registry, $from, $to, $text) = @_;
+
+    my %transaction_description;
+    my $parse_type = 0;
+    
+    # need this later to deduce the payer...
+    $transaction_description{from} = $from ;
+    
+# send 4 duckets to unknown at dalston for barking lessons
+# parse does include currency word, single currency only, no description also allowed
+    
+    if ( $text =~ /send\s+(\d+)\s+(\w+)\s+to\s+(\w+)\s+at\s+(\w+)\s+for\s+(.*)/i
+      )
+    {
+
+        $transaction_description{'amount'}         = $1;
+        $transaction_description{'currency'}       = $2;
+        $transaction_description{'destination'}    = $3;
+        $transaction_description{'registry'}       = $4;
+        $transaction_description{'description'}    = $5;
+        $parse_type                                = 1;    # no currency word
+        
+        my $x = join( "|", %transaction_description );
+        $transaction_description{debug} = "parsed mail transaction is: $x parse type is $parse_type\n\n";
+        
+    } elsif ($text =~ /balance/i ) {
+        $transaction_description{message} = "parsed mail transaction is: request-balance \n\n";
+    }
+    else {
+        $transaction_description{error} = "unparsed pay transaction is: $input" ;
+    }
+
+    # check currency, registry and destination are OK, if not cumulate with errors
+    # deduce tradeSource using 'from' email
+    ( $transaction_description{'source'},$error_message) = _check_to_and_from(\%transaction_description) ;     
+    $transaction_description{error} .= $error_message if (length($error_message)) ;    
+    
+
+    return ( $parse_type, \%transaction_description );
+
+}
+
+
+sub mail_transaction {
+
+        my ($transaction_description_ref) = @_ ;
+        
+        # convert to standard transaction input format, fields etc.
+        #fromregistry : chelsea
+        $transaction{fromregistry} = $transaction_description_ref->{'registry'};
+
+
+        
+
+        #home : http://cclite.caca-cola.com:83/cgi-bin/cclite.cgi, for example
+        $transaction{home}      = "";           # no home, not a web transaction
+                                                #subaction : om_trades
+        $transaction{subaction} = 'om_trades';
+
+        #toregistry : dalston
+        $transaction{toregistry} = $transaction_description_ref->{'registry'};
+
+        #tradeAmount : 23
+        $transaction{tradeAmount} = $transaction_description_ref->{'amount'};
+
+        #tradeCurrency : ducket
+        $transaction{tradeCurrency} = $transaction_description_ref->{'currency'};
+
+        #tradeDate : this is date of reception and processing, in fact
+        my ( $date, $time ) = &Ccu::getdateandtime( time() );
+        $transaction{tradeDate} = $date;
+
+        #tradeTitle : added by this routine
+        my $description = 'Via mail' . $transaction_description_ref->{'description'}  ;
+        $transaction{tradeTitle} = $description ;
+
+        #FIXME: tradeDescription, duplicated!
+        $transaction{tradeDescription} = $description;
+
+        #tradeDestination : ddawg
+        $transaction{tradeDestination} = $transaction_description_ref->{'destination'};
+
+        #tradeItem : test to see variables
+        #tradeSource : manager
+        $transaction{tradeSource} = $transaction_description_ref->{'source'};
+
+
+        # call ordinary transaction
+        my $transaction_ref = \%transaction;
+        my ( $metarefresh, $home, $error, $output_message, $page, $c ) =
+          transaction( 'mail', $transaction{fromregistry},
+            'om_trades', $transaction_ref, $pages, $token );
+    
+    return $output_message ;        
+}            
+
+
+1;

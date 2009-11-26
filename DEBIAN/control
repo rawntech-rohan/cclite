@@ -1,0 +1,23 @@
+Source: cclite
+Section: unknown
+Version: 0.6.0
+Priority: extra
+Maintainer: Hugh Barnard <hugh.barnard@gmail.com>
+Homepage: http://www.hughbarnard.org/?q=node/3
+Pre-Depends: perl
+Package: cclite
+Architecture: i386
+Depends: apache2,gammu,mysql-server,perl,libmail-sendmail-perl,libdigest-sha1-perl,libdbi-perl,libxml-rss-perl,libxml-simple-perl,liblog-log4perl-perl
+Description: Alternative currency management software
+ This package provides web based server software for LETS, mutual social credit
+ and other possible implementations of alternative and complementary currencies.
+ .
+ It provides various interfaces, OS-Commerce, REST, SOAP, email and Mobile Phone
+ for current transfer. It provides multiple currency and interserver communication.
+ .
+ It uses Perl and some CPAN modules, Apache, MySql and Cron and Digest::SHA1
+ (but Digest::SHA2 is highly recommended).
+ .
+
+
+

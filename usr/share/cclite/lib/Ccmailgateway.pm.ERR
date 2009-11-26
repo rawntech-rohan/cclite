@@ -1,0 +1,48 @@
+
+137: $message = "$from{$key},"transaction invalid: $input" ;
+                --------------^                             
+found bareword where operator expected (previous token underlined)
+
+There is no previous '?' to match a ':' on line 137
+137: $message = "$from{$key},"transaction invalid: $input" ;
+                                                 ^
+
+137: $message = "$from{$key},"transaction invalid: $input" ;
+                                                   ------^  
+found String where operator expected (previous token underlined)
+
+168:         $transaction_description{debug} = "parsed mail transacti ...
+                                                ^                        
+found bareword where operator expected
+
+There is no previous '?' to match a ':' on line 168
+168: ... debug} = "parsed mail transaction is: $x parse type is $parse_ty ...
+                                             ^
+
+168: ... } = "parsed mail transaction is: $x parse type is $parse_type\n\ ...
+                                          -- ^                               
+found bareword where operator expected (previous token underlined)
+
+171:         $transaction_description{message} = "parsed mail transac ...
+                                                  ^                      
+found bareword where operator expected
+
+There is no previous '?' to match a ':' on line 171
+171: ... ssage} = "parsed mail transaction is: request-balance \n\n";
+                                             ^
+
+174:         $transaction_description{error} = "unparsed pay transact ...
+                                                ^                        
+found bareword where operator expected
+
+There is no previous '?' to match a ':' on line 174
+174: ... rror} = "unparsed pay transaction is: $input" ;
+                                             ^
+242:	final indentation level: 2
+
+Final nesting depth of '{'s is 2
+The most recent un-matched '{' is on line 136
+136: {
+     ^
+242:	hit EOF seeking end of quote/pattern starting at line 137 ending in "
+242:	To save a full .LOG file rerun with -g

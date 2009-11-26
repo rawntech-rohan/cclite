@@ -1,0 +1,111 @@
+<form id="form">
+<table>
+
+<tr>
+<td title="start the graphing script">
+Graphing
+</td>
+<td title="start accepting email input from the batch mailbox for $$fieldsref{registry}">
+Email input 
+</td>
+<td title="start accepting batch input from uploaded csv files">
+CSV File input
+</td>
+<td title="start producing rss feeds for yellow pages small ads">
+RSS Feed    
+</td>
+<td title="start accepting input via gammu from a local mobile phone">
+Gammu input
+</td>
+</tr>
+
+<tr>
+
+<td>
+   <select onchange="on_select_change('stats');" id="stats_value" >
+	<option value="0"> Stop Stats</option>
+	<option value="5">Every 5min</option>
+	<option value="10">Every 10min</option>
+	<option value="30">Every 30min</option>
+</select>
+   
+    </td>
+
+
+
+
+<td>
+    <select onchange="on_select_change('mail');" id="mail_value" >
+	<option value="0"> Stop Mail</option>
+	<option value="5">Every 5min</option>
+	<option value="10">Every 10min</option>
+	<option value="30">Every 30min</option>
+</select>
+
+    
+    </td>
+
+
+
+<td
+    <select onchange="on_select_change('csv');" id="csv_value" >
+	<option value="0"> Stop Csv</option>
+	<option value="5">Every 5min</option>
+	<option value="10">Every 10min</option>
+	<option value="30">Every 30min</option>
+</select>
+    </td>
+
+
+
+
+
+<td>
+    <select onchange="on_select_change('rss');" id="rss_value" >
+	<option value="0"> Stop Rss</option>
+	<option value="5">Every 5min</option>
+	<option value="10">Every 10min</option>
+	<option value="30">Every 30min</option>
+</select>
+    
+    </td>
+
+
+
+
+<td>
+    <select onchange="on_select_change('gammu');" id="gammu_value" >
+	<option value="0"> Stop SMS</option>
+	<option value="5">Every 5min</option>
+	<option value="10">Every 10min</option>
+	<option value="30">Every 30min</option>
+</select>
+  </td>
+
+
+
+</tr>
+
+<tr>
+    <td><span id="stats">Wait</span></td>
+    <td><span id="mail">Wait</span></td>
+   <td><span id="csv">Wait</span></td>
+  <td><span id="rss">Wait</span></td> 
+ <td><span id="gammu">Wait</span></td>   
+</tr>    
+
+</table>
+</form>
+
+<div id="stats_status"></div>
+<div id="mail_status"></div>
+<div id="csv_status"></div>
+<div id="rss_status"></div>
+<div id="gammu_status"></div><br/>
+
+<div id="fileliteral" class="smalltext">Any files in red below have problems, run mouse over to see:</div>
+<div id="fileproblems" class="smalltext">$$fieldsref{displaybatchfiles}</div>
+<br/>
+
+<img id="transactions" src="/images/charts/$$fieldsref{registry}/transaction.gif" />
+<img id="volumes" src="/images/charts/$$fieldsref{registry}/volumes.gif" />

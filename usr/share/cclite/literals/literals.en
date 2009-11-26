@@ -1,0 +1,216 @@
+useradded=User Added
+confirm=Confirm
+isnowactive=is now active
+loginfailedfor=login failed for
+at=at
+passwordfailedfor=password failed for
+isnotactive=is not active: confirm or contact the administrator
+goodbye=Goodbye
+delete=delete
+modify=modify
+display=display
+found=Found
+recordswith=records with
+in=in
+is=is
+directorypageadded=Directory Page Added
+postcode=Postcode
+telephone=Telephone
+directorylisting=Directory Listing
+offered=Offered
+wanted=Wanted
+forsale=For Sale
+putcursoron=Put cursor on number to get ad title
+languagechanged=Language changed
+transactionrejected=Transaction rejected
+nonexist=Non existent destination
+userinactive=User inactive
+noremotecurrency=Currency not in remote registry
+currencyinactive=Currency inactive
+sameaccount=Cannot transfer to same account
+transactionaccepted=Transaction Accepted
+transactionstatusnow=Transaction status is now
+currency=Currency
+balance=Balance
+trades=Trades
+tradevolumes=Trade Volumes by Month<br/> (inc. waiting/opening etc....)
+ok=ok
+delete=delete
+modify=modify
+show=show
+no=no
+pleaseactivate=Please activate your new Cclite account
+pleasenote=Please note that your new account is created and can be activated by going to:
+usernameis=Your user name is
+newpassword=Your new cclite password 
+suppliedwhen=and the password is the one that you supplied when registering.
+per=per
+emailnotfound=Email not found
+during=during
+clicktoexpand=Click to See More
+clicktocollapse=Click to Return to Major Categories
+newinstall=This is a New Install: cclite.cf will be created
+cannotbewritten=cannot be written to
+doesnotexist=does not exist
+configurationupdated=Configuration updated
+currencycreated=Currency created
+categorynameexists=Create rejected<br>Category name exists
+categorycreated=Category created
+usepassword=Please correct database username/password in cclite.cf
+registryexists=Registry exists, please choose another name
+registrycreated=Registry Created
+followingregistries=The following registries are within this server instance
+reject=No!
+wrongdbversion=Database upgrade to 4.0 or above needed:
+dbpasswordorser=Database password or user name problem:
+nowlogonandcreate=Now logon as manager and create a currency
+invalidsending=invalid sending user
+invalidreceiving=invalid receiving user
+invalidcurrency=invalid currency
+notadebit=not a debit transaction
+batchtransaction=Batch transaction: see description
+accepted=Transaction accepted
+nosource=No source account for transaction
+notanadmin=You are not an administrator
+tradepartner=Trade Partner
+# translation of table names to give nicer messages
+om_trades=Trades
+om_users=Users
+om_yellowpages=Directory
+om_currencies=Currencies
+om_partners=Registry Partners
+om_categories=Ad Categories
+om_registry=Registry Description
+merchantkeyerror=merchant key error
+notregisterederror=shopper not cclite registered error
+currencysymbolerror=currency symbol error
+manufacturererror=manufacturer error
+update=Update
+clear=Clear
+needa=Need a
+fieldvalueplease=field value please
+currencyrejected=Create rejected<br/>Currency name exists
+bademail=Invalid Email Address
+badphone=Invalid Mobile Phone Number
+userexists=User Exists, Please choose another
+emailexists=Email exists, must be unique
+badstreet=Unlikely street name
+badtown=Unlikely town name
+badpostcode=Badly formed postcode
+passwordnotsame=Password and confirm must be the same
+passwordnelogin=Password must not be the same as login
+passwordgesix=Password must be more than six characters
+badcurrencyname=Invalid currency name, one word, must start with letter
+badregistryname=Invalid registry, one word, must start with letter
+badcommitlimit=Commitment limit must be numeric
+unknownregistry=Unknown registry or database error
+baduriname=Uri must of form http://domain/Cclite
+badproxyname=Proxy must be of form http://domain/cgi-bin/ccserver.cgi
+partneradded=Registry partner created
+nosysaccount=No system account found, please create one
+mysqlnotrunning=Mysql is probably not running, please start server
+overservicechargelimit=Service charge is more than configured limit
+servicechargeapplied=Service charge applied
+remotepartnerinactive=Remote partner status is inactive
+transactionlimitexceeded=This transaction is bigger than the limit for this registry
+ipaddressnotfound=This IP address is not found in the list of allowed ip addresses
+wanted=wanted
+offered=offered
+pages=Pages
+new=New
+cancel=cancel
+# these literals display what kind of transaction is being listed
+accepted=for accepted
+not_accepted=for not accepted
+active=for active
+all=for all
+error=for in error
+noremotepartner=No Remote Partner Found
+split=split
+partnerexists=This registry partner exists already
+tryagain=Try again?
+regmanager=Registry Manager
+batchtrans=Batch Transactions
+heresyourpassword=Here's your password at
+pleasechangeit=please change it when you get it!
+newpassword1=new password
+passwordsent=Password sent to your email address (could be in spam folder!!!)
+configordbproblem=configuration or database problem: wrong user or password?
+# literals for sms gateway
+smslocked=Account locked for sms: please see administrator!
+smspinactive=Pin checked ok: your account is active!
+smspinfail=Pin invalid: please try again!
+smspinchanged=Your new pin is now ready to use
+smstransactiontitle=SMS Transaction
+smstransactionemailtitle=Cclite SMS Transaction
+smsinvalidsyntax=Invalid SMS payment message
+smsnoorigin=No sms sending user found
+smsnodestination=No destination sms user found
+# end
+mobphoneexists=mobile phone number belongs to someone else, must be unique
+invalidlogin=User name contains spaces or forbidden characters
+invalidlanguage=No user language chosen
+# validating mobile phone pins for mobile transfer
+needpin=Need PIN number and confirmation for PIN number
+pinobvious=PIN too obvious: no sequences
+pinsamenumbers=Don't use sets of the same numbers in your PIN
+pinconfirmdifferent=PIN and PIN confirmation must be the same
+#
+mustgotocash=Cash must be credited to cash account only
+hi=Hello
+# used for rdf titles in Ccrss.pm
+matched=matched
+all=all
+offered=offered
+wanted=wanted
+#
+nonexistentpartner=Partner Registry does not exist
+sha1warning=Hash type is SHA1: Install SHA2 if possible, cannot be changed after setup
+# messages for ccsuggest
+loginfirst=login first!
+isuniquename=is a unique name
+statsupdate=stats update at
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

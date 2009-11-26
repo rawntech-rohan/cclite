@@ -1,0 +1,103 @@
+24 April 2007
+30 June 2007
+
+1. Merchant key field added to registry creation and update (correction to 0.4.1)
+
+2. Allowed IP added to registry, this is for straight through os-commerce transactions.  Needs small registry change (for future use)
+
+3. Added latest news field to registry, one-line news item for front of interface. Needs small registry change.
+
+4. Modify registry characteristics transaction introduced and working
+
+5. Tidy up for use Digest::SHA2 now confined to Ccsecure.pm. This opens way
+   to version with use of SHA1 only (but not recommended).
+
+6. Trade Reference (SHA2 hash) now added to detail display for transaction
+Possibly, in the future the hash should not include the status field?
+
+7. html documentation for all scripts and modules in ../doc/html via perltidy
+
+8. Auto-suggest for destination trade field using scriptaculous + ccsuggest.cgi
+   Simplifies filling in destination for large groups.
+
+9. Auto-suggest for all search fields using scriptaculous + ccsuggest.cgi
+
+
+10. Auto-suggest to indicate when user has chosen unique screen name
+    Simplifies screen name choice for large groups.
+
+11. Can now use templatename to display templates other than index.html
+
+12. Perl tidy on all modules and scripts
+
+13. Css and skin changed to tabs based on http://labs.silverorange.com/archives/2004/may/updatedsimple. This is simpler
+    than the previous one
+
+14. Search forms now require at least one character input
+
+15. Display user bug corrected by using $$fieldsref{duserLogin}
+
+16. News item can be displayed on front user page via registry modification form.
+    Currently text-only news items.
+
+17. Simple curlclient.php added to examples, interfacing php to REST interface
+    for a currency transaction.
+
+18. Added a find/modify yellow page transaction to administration menu.
+
+19. Transaction summary now sorts 'push down'(reverse chronological) most recent transaction at top.
+
+20. Revised/simplified code for yellow pages, more craiglist and goodbye to expanding menus.
+    Code for 'old' style retained for the moment.
+
+21. (bug correction) Can only delete ads that belong to logged on user or via admin.
+
+22. Striped display for all tables, easier reading for transaction lists etc. Various types and types of status are colour coded.
+
+23. Manager can cancel transactions, they are preserved but have a 'cancelled' status in the
+database. In the future, many cancelled transactions will reduce the 'system health' index
+(as will many declined).
+
+24. Improved (one hopes) yellow pages directory. The transaction that delivers this can be
+used anywhere, it currently just returns a table.
+
+25. When the manager finds transactions the whole set is delivered not just those that belong
+to the manager. Should be any, anyway!
+
+26. Tidied up transaction reference hash, only hashes core information for transaction, not all template fields etc.means that hash can be reproduced if necessary (to test the authenticity of the transaction). Also needs private server token in hash.
+
+27. Balance and volume constrained to 'active' and 'waiting' transactions
+
+28. tradeSource and tradeDestination updated correctly in database, meaning extensive
+changes to transaction retrieval: get_trades added to deal with this
+
+29 There's now a googlegroups group: http://groups.google.co.uk/group/cclite for support
+this will take over from the sourceforge forum, which was hardly used
+
+30. fields{maxreport} for summary and fields{righthandside} for displaying stuff to right
+of main display added
+
+31. Validation and reporting improved for transactions. Remote error codes translated
+locally. Error transactions recorded in local database with status 'rejected' and error
+messages in the transaction description.
+
+32. Split transactions commented in title and displayed as orange. This is not fully
+multilingual though.
+
+33. Create category somewhat improved but could do with further work
+
+34. Currency names are always created and compared as lower case for simplicity
+
+35. Update and some corrections in manual.
+
+
+
+
+
+
+
+
+
+
+
+

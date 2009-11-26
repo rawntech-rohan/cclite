@@ -1,0 +1,57 @@
+Release Notes 0.4.1 30/06/2006
+
+1. Mode field now used in show_balance_and_volume, 'html' will return html
+   and 'values' will return array references. This advances increasing separation
+   of model-view-controller elements.
+
+2. Version fields added in cclite.cgi and ccadmin.cgi, these are used for the 
+   web displays. They're not configured because they belong to the scripts.
+
+3. Commitment limit (global for a given registry, not for a currency) is tested 
+   before allowing a transaction
+
+4. Split transaction now implemented, allows a transaction to involve two currencies
+   and have a single hash reference (hash reference for the primary transaction..).
+
+5. Mode field now used within transaction, used for split transaction, for example
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
